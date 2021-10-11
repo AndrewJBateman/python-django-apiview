@@ -13,57 +13,69 @@
 		<title>Data App</title>
 	</head>
 	<body>
-		<h1 class="text-center">Data App</h1>
-    <h2>Search Country</h2>
-    <form action="" method="get">
-      <input type="text" name="country" />
-      <button type="submit" value="Search">Search</button>
-    </form>
-    <br>
-    <br>
-    <h2>Search Category</h2>
-    <form action="" method="get">
-      <input type="text" name="country" />
-      <button type="submit" value="Search">Search</button>
-    </form>
-
-
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					{% for article in articles %}
-
-					<div class="card rounded shadow-lg m-2" style="width: 25rem">
-						<img
-							src="{{ article.urlToImage }}"
-							class="card-img-top"
-							alt="data"
-						/>
-						<div class="card-body">
-							<p class="card-text">{{ article.author }}</p>
-							<h5 class="card-title">{{ article.title }}</h5>
-							<p class="card-text">{{ article.source.name }}</p>
-							<p class="card-text">{{ article.description }}</p>
-							<hr />
-							<small> published: {{ article.publishedAt }}</small>
-							<a href="{{ article.url }}" class="btn btn-info m-1"
-								>See article</a
-							>
-						</div>
-					</div>
-
-					{% endfor %}
-				</div>
-
-				<div class="col-md-6">
-          Category
-          <ul class="list-group">
-            <li class="list-group-item"><a class="btn btn-primary" href="{% url 'home' %}?category=Health">Health</a></li>
-            <li class="list-group-item"><a class="btn btn-primary" href="{% url 'home' %}?category=Science">Science</a></li>
-            <li class="list-group-item"><a href="{% url 'home' %}?category=Science">Science</a></li>
-          </ul>
-        </div>
+		<div class="container text-center p-2">
+			<div class="btn-group" role="group" aria-label="First group">
+				<a class="btn btn-secondary" href="{% url 'home' %}?category=technology"
+					>Tech</a
+				>
+				<a class="btn btn-success" href="{% url 'home' %}?category=health"
+					>Health</a
+				>
+				<a class="btn btn-danger" href="{% url 'home' %}?category=Entertainment"
+					>Entertainment</a
+				>
+				<a class="btn btn-secondary" href="{% url 'home' %}?category=Sports"
+					>Sports</a
+				>
+				<a class="btn btn-primary" href="{% url 'home' %}?category=Science"
+					>Science</a
+				>
+				<a class="btn btn-info" href="{% url 'home' %}?category=Business"
+					>Business</a
+				>
 			</div>
+			<form action="" method="get">
+				<div class="row pt-2">
+					<div class="input-group col-lg-1 col-md-6 col-lg-6 mx-auto">
+						<div class="input-group-prepend">
+							<div class="input-group-text" id="btnGroupAddon2">Country</div>
+						</div>
+						<input
+							type="text"
+							name="country"
+							class="form-control"
+							placeholder="Enter code, e.g. 'us'"
+							aria-label="Input country"
+							aria-describedby="btnGroupAddon2"
+						/>
+						<button type="submit" value="Search">Search</button>
+					</div>
+				</div>
+			</form>
+
+			{% for article in articles %}
+
+			<div class="card rounded shadow-lg my-2 mx-auto" style="width: 25rem">
+				<img src="{{ article.urlToImage }}" class="card-img-top" alt="data" />
+				<div class="card-body">
+					<h6 class="card-title text-justify">{{ article.title }}</h6>
+					<p class="card-text text-justify">{{ article.description }}</p>
+					<p class="card-text text-info">
+						By: {{ article.author }} - {{ article.source.name }}
+					</p>
+					<hr />
+					<small class="text-info"> Published: {{ article.publishedAt }}</small>
+					<a
+						href="{{ article.url }}"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="btn btn-info m-1"
+						>See article</a
+					>
+				</div>
+			</div>
+
+			{% endfor %}
 		</div>
 	</body>
 </html>
